@@ -1,0 +1,11 @@
+.list_images {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  align-items: center;
+}
+
+.item_images {
+  margin: 10px;
+  width: 800px;
+}
