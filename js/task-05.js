@@ -3,12 +3,10 @@ const spanEl = document.querySelector('#name-output');
 console.log(inputEl.attributes);
 console.log(spanEl.attributes);
 
-inputEl.oninput = () => {
-  if (inputEl.value == '') {
-    spanEl.textContent = 'незнакомец';
-  }
-  spanEl.textContent = inputEl.value;
-};
+inputEl.oninput = () =>
+  inputEl.value == ''
+    ? (spanEl.textContent = 'незнакомец')
+    : (spanEl.textContent = inputEl.value);
 
 // Либо второй вариант
 // inputEl.oninput = () => {
@@ -16,4 +14,12 @@ inputEl.oninput = () => {
 //     spanEl.innerHTML = 'незнакомец';
 //   }
 //   spanEl.innerHTML = inputEl.value;
+// };
+
+// Первый вариант
+// inputEl.oninput = () => {
+//   if (inputEl.value == '') {
+//     spanEl.textContent = 'незнакомец';
+//   }
+//   spanEl.textContent = inputEl.value;
 // };
