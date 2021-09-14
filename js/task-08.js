@@ -1,80 +1,42 @@
-const btnEl = document.querySelectorAll('button[data-action]');
 const inputEl = document.querySelector('input');
-const boxEl = document.querySelector('#boxes');
-function createBoxes(amount) {
-  const elements = [];
-  let widthEl = 30;
-  let heightEl = 30;
-  const step = 10;
-  for (let i = 0; i < amount; i++) {
-    elements.push(document.createElement('div'));
-    elements[i].style.width = widthEl + 'px';
-    elements[i].style.height = heightEl + 'px';
-    elements[i].style.backgroundColor = `#${Math.random()
-      .toString(16)
-      .substring(2, 8)}`;
-    widthEl += step;
-    heightEl += step;
-  }
-  boxEl.append(...elements);
-}
-function destroyBoxes() {
-  boxEl.innerHTML = '';
-}
-btnEl.forEach(element => {
-  if (element.dataset.action === 'render') {
-    element.addEventListener('click', () => {
-      destroyBoxes();
-      createBoxes(inputEl.value);
-    });
-  } else {
-    element.addEventListener('click', destroyBoxes);
-  }
+const createBtnEl = document.querySelector('button[data-action="render"]');
+const removeBtnEl = document.querySelector('button[data-action="destroy"]');
+const boxesEl = document.querySelector('#boxes');
+console.log(inputEl);
+console.log(createBtnEl);
+console.log(removeBtnEl);
+console.log(boxesEl);
+let width = 30;
+let height = 30;
+const step = 10;
+
+createBtnEl.addEventListener('click', () => {
+  createDiv(inputEl.value);
 });
 
-// const input = document.querySelector(`#controls input[type="number"]`);
+removeBtnEl.addEventListener('click', () => {
+  removeDiv();
+});
 
-// const createBtn = document.querySelector(
-//   `#controls button[data-action="render"]`,
-// );
+function randomCount(max) {
+  return Math.floor(Math.random() * max);
+}
 
-// const removeBtn = document.querySelector(
-//   `#controls button[data-action="destroy"]`,
-// );
-
-// const boxesContainer = document.querySelector(`#boxes`);
-
-// function getRandomInt(max) {
-//   return Math.floor(Math.random() * max);
-// }
-
-// let width = 30;
-// let height = 30;
-
-// const createBoxes = amount => {
-//   for (let i = 0; i < amount; i++) {
-//     const newDiv = document.createElement(`div`);
-//     newDiv.style.width = `${width}px`;
-//     newDiv.style.height = `${height}px`;
-//     width += 10;
-//     height += 10;
-//     boxesContainer.append(newDiv);
-//     newDiv.style.backgroundColor = `rgb(${getRandomInt(256)}, ${getRandomInt(
-//       256,
-//     )}, ${getRandomInt(256)})`;
-//   }
-// };
-
-// const destroyBoxes = () => {
-//   boxesContainer.innerHTML = ``;
-//   width = 30;
-//   height = 30;
-// };
-
-// createBtn.addEventListener(`click`, () => {
-//   createBoxes(input.value);
-// });
-
-// removeBtn.addEventListener(`click`, () => {
-//   destroyBoxes();
-// });
+function createDiv(el) {
+  for (let i = 0; i < el; i += 1) {
+    const newDiv = document.createElement('div');
+    newDiv.style.width = `${width}px`;
+    newDiv.style.height = `${height}px`;
+    width += step;
+    height += step;
+    boxesEl.insertAdjacentElement('beforeend', newDiv);
+    newDiv.style.backgroundColor = `rgb(${randomCount(256)}, ${randomCount(
+      256,
+    )}, ${randomCount(256)})`;
+  }
+}
+function removeDiv() {
+  boxesEl.innerHTML = '';
+  width = 30;
+  height = 30;
+}
