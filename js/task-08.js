@@ -36,6 +36,7 @@ function createDiv(el) {
   }
 }
 function removeDiv() {
+  inputEl.value = '';
   boxesEl.innerHTML = '';
   width = 30;
   height = 30;
